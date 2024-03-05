@@ -13,11 +13,11 @@ Files for running SciCat with docker-compose.
    ```sh
    docker build ./rabbitmq -t rabbitmq-inited:latest 
    ```
-2. Run with the following command inside the directory
+3. Run with the following command inside the directory
    ```sh
    docker-compose up -d
    ```
-3. SciCat will now be available on http://catanie.localhost. The Loopback API explorer of catamel is available at http://catamel.localhost/explorer/, the one for the search-api at http://localhost/panosc-explorer/. RabbitMQ's management console is available at http://localhost:15672.
+4. SciCat will now be available on http://catanie.localhost. The Loopback API explorer of catamel is available at http://catamel.localhost/explorer/, the one for the search-api at http://localhost/panosc-explorer/. RabbitMQ's management console is available at http://localhost:15672.
 
 ## Add Your Local Configuration
 
