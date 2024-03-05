@@ -17,7 +17,7 @@
    "jsonMetadataEnabled":true,
    "jupyterHubUrl":"",
    "landingPage":"",
-   "lbBaseURL":"http://127.0.0.1",
+   "lbBaseURL":"http://catamel.localhost",
    "localColumns":[
       {
          "name":"datasetName",

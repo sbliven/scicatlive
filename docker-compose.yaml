@@ -34,9 +34,11 @@ services:
       - ./config/catamel/config.local.js:/usr/src/app/server/config.local.js
       - ./config/catamel/datasources.json:/usr/src/app/server/datasources.json
       - ./config/catamel/providers.json:/usr/src/app/server/providers.json
+      - ./config/catamel/component-config.local.json:/usr/src/app/server/component-config.local.json
     labels:
       - "traefik.http.routers.catamel.rule=PathPrefix(`/api`, `/auth`, `/explorer`)"
       - "traefik.http.routers.catamel.entrypoints=web"
+      - "traefik.http.routers.catamel.rule=Host(`catamel.localhost`)"
   catanie:
     #image: dacat/catanie:latest
     image: scicatproject/frontend:v4.0.0
@@ -48,6 +50,7 @@ services:
     labels:
       - "traefik.http.routers.catanie.rule=PathPrefix(`/`)"
       - "traefik.http.routers.catanie.entrypoints=web"
+      - "traefik.http.routers.catanie.rule=Host(`catanie.localhost`)"
   search-api:
     image: dacat/panosc-search-api:latest
     depends_on: 

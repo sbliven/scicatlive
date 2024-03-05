@@ -21,15 +21,26 @@ module.exports = {
     jobError: "Finished with errors",
     jobCancel: "Cancelled",
   },
-  smtpSettings: {
+  // Add to this section if you want to use RabbitMQ for the Proposals mechanism
+  /*rabbitmq: {
+    enabled: false,
+    host: null,
+    port: null,
+    queue: null
+  },*/
+  /*smtpSettings: {
     host: "SMTP.YOUR.DOMAIN",
     port: 25,
     secure: false,
-  },
+  },*/
   smtpMessage: {
     from: "scicatarchivemanager@YOUR.DOMAIN",
     to: undefined,
     subject: "[SciCat " + process.env.NODE_ENV + "]",
     text: undefined, // can also set html key and this will override this
   },
+  queue: "rabbitmq",
+  logbook: {
+    enabled: false
+  }
 };
