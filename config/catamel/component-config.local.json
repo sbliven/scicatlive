@@ -20,7 +20,7 @@
         },
         "topology": {
             "connection": {
-                "uri": "amqp://admin:password@scicatlive-local-rabbitmq-1"
+                "uri": "amqp://admin:password@scicatlive_local-rabbitmq_1"
             },
             "exchanges": [{
                 "name": "jobs.write",

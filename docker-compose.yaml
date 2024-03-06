@@ -29,7 +29,10 @@ services:
     #image: dacat/catamel:latest
     image: scicatproject/backend:v0.0.5
     depends_on:
-      - mongodb
+      mongodb:
+        condition: service_started
+      local-rabbitmq:
+        condition: service_healthy
     volumes:
       - ./config/catamel/config.local.js:/usr/src/app/server/config.local.js
       - ./config/catamel/datasources.json:/usr/src/app/server/datasources.json
@@ -63,7 +66,7 @@ services:
       FACILITY: "SAMPLE-SITE"
   local-rabbitmq:
     hostname: local-rabbitmq
-    image: 'rabbitmq-inited:latest'
+    build: 'rabbitmq/.'
     labels:
       kompose.service.type: nodeport
     ports:
@@ -76,6 +79,12 @@ services:
       - RABBITMQ_PASSWORD=password
     volumes:
       - 'rabbitmq_data:/bitnami'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      start_period: 3s
+      interval: 30s
+      timeout: 10s
+      retries: 5
 volumes:
   mongodb_data:
     driver: local
