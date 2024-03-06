@@ -9,15 +9,13 @@ Files for running SciCat with docker-compose.
    ```sh
    git clone https://github.com/SciCatProject/scicatlive.git
    ```
-2. Build the rabbitmq docker image
-   ```sh
-   docker build ./rabbitmq -t rabbitmq-inited:latest 
-   ```
-3. Run with the following command inside the directory
+2. Run with the following command inside the directory
    ```sh
    docker-compose up -d
    ```
-4. SciCat will now be available on http://catanie.localhost. The Loopback API explorer of catamel is available at http://catamel.localhost/explorer/, the one for the search-api at http://localhost/panosc-explorer/. RabbitMQ's management console is available at http://localhost:15672.
+3. SciCat will now be available on http://catanie.localhost. The Loopback API explorer of catamel is available at http://catamel.localhost/explorer/, the one for the search-api at http://localhost/panosc-explorer/. RabbitMQ's management console is available at http://localhost:15672.
+
+Note: if you make changes to the rabbitmq image, run the docker-compose command with the `--build` parameter to rebuild the image!
 
 ## Add Your Local Configuration
 
@@ -60,7 +58,8 @@ These files are ingested into the database using mongo funcionalities and bypass
 To use scicat, please refer to the [original documentation](https://scicatproject.github.io/documentation/)
 
 ## Add Archive System Mock
-For now, clone [the archive mock repository](https://github.com/SwissOpenEM/ScicatArchiveMock), install `pika` with pip, and run the following command from its directory:
+For now, clone [the archive mock repository](https://github.com/SwissOpenEM/ScicatArchiveMock) then run the following two commands:
 ```sh
-python job_handler_mq -b "http://catamel.localhost/api/v3" -u "admin" -p "2jf70TPNZsS"
+docker build . -t "job_mock:latest"
+docker run --network scicatlive_default -e "SCICAT_URL=http://catamel:3000/api/v3/" -e "RABBITMQ_URL=local-rabbitmq" -e "USERNAME=admin" -e "PASSWORD=2jf70TPNZsS" job_mock:latest
 ```
