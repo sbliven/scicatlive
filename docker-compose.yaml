@@ -85,6 +85,18 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+  archive-mock:
+    build: 'ScicatArchiveMock/.'
+    depends_on:
+      local-rabbitmq:
+        condition: service_healthy
+      catamel:
+        condition: service_started
+    environment:
+      - "SCICAT_URL=http://catamel:3000/api/v3/"
+      - "RABBITMQ_URL=local-rabbitmq"
+      - "USERNAME=admin"
+      - "PASSWORD=2jf70TPNZsS" 
 volumes:
   mongodb_data:
     driver: local

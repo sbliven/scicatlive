@@ -1,0 +1,3 @@
+[submodule "ScicatArchiveMock"]
+	path = ScicatArchiveMock
+	url = https://github.com/SwissOpenEM/ScicatArchiveMock
